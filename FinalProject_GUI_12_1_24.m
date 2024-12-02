@@ -1,8 +1,9 @@
-classdef FinalProject_GUI_12_1_24 < matlab.apps.AppBase
+classdef FinalProject_GUI_12_2_24 < matlab.apps.AppBase
 
     % Properties that correspond to app components
     properties (Access = public)
         UIFigure              matlab.ui.Figure
+        NextHandButton        matlab.ui.control.Button
         HandCardsLabel_3      matlab.ui.control.Label
         HandCardsLabel_2      matlab.ui.control.Label
         HandCardsLabel        matlab.ui.control.Label
@@ -71,7 +72,7 @@ classdef FinalProject_GUI_12_1_24 < matlab.apps.AppBase
     % Callbacks that handle component events
     methods (Access = private)
 
-        % Callback function
+        % Code that executes after component creation
         function InitVal(app)
             % Initialize balances and pot
             app.p1Bal = 1000; % Set initial balance for Player 1
@@ -116,6 +117,13 @@ classdef FinalProject_GUI_12_1_24 < matlab.apps.AppBase
             else
                 uialert(app.UIFigure, 'Insufficient balance to raise.', 'Error'); % Display error
             end
+        end
+
+        % Button pushed function: NextHandButton
+        function NextHandButtonPushed(app, event)
+            %need function to start the next hand
+            %has to keep everyones balance but empty the pot
+            %and deal new cards
         end
     end
 
@@ -359,6 +367,12 @@ classdef FinalProject_GUI_12_1_24 < matlab.apps.AppBase
             app.HandCardsLabel_3.Position = [505 536 113 24];
             app.HandCardsLabel_3.Text = 'Hand: {Cards}';
 
+            % Create NextHandButton
+            app.NextHandButton = uibutton(app.UIFigure, 'push');
+            app.NextHandButton.ButtonPushedFcn = createCallbackFcn(app, @NextHandButtonPushed, true);
+            app.NextHandButton.Position = [271 72 100 22];
+            app.NextHandButton.Text = 'Next Hand';
+
             % Show the figure after all components are created
             app.UIFigure.Visible = 'on';
         end
@@ -368,7 +382,7 @@ classdef FinalProject_GUI_12_1_24 < matlab.apps.AppBase
     methods (Access = public)
 
         % Construct app
-        function app = FinalProject_GUI_12_1_24
+        function app = FinalProject_GUI_12_2_24
 
             % Create UIFigure and components
             createComponents(app)
