@@ -71,7 +71,15 @@ classdef Eval
 
 	    strength = strength + Eval.isRflush(hand1) * 15^9;
 	end
+	function fixed = fixHand(hand)
+	    hand(hand == "J") = "11";
+	    hand(hand == "Q") = "12";
+	    hand(hand == "K") = "13";
+	    hand(hand == "A") = "14";
+	    fixed = hand;
+	end
 	function strength = eval7(hand)
+	    hand = fixHand(hand); 
 	    inds = nchoosek([1:7], 5);
 	    strength = 0;
 	    for i = [1:21]
