@@ -20,6 +20,13 @@ classdef Deck
 	    obj.deck = obj.deck(2:end);
 	    card = [obj.cards(2 * top - 1), obj.cards(2 * top)]';
 	end
+	function [cards, obj] = dealn(obj, n)
+	    cards = [];
+	    for i = [1:n]
+		[card, obj] = obj.deal();
+		cards = [cards, card];
+	    end
+	end
     end
 end
 
