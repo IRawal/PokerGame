@@ -18,7 +18,7 @@ classdef Deck
 	function [card, obj] = deal(obj)
 	    top = obj.deck(1);
 	    obj.deck = obj.deck(2:end);
-	    card = [obj.cards(2 * top - 1), obj.cards(2 * top)];
+	    card = [obj.cards(2 * top - 1), obj.cards(2 * top)]';
 	end
     end
 end
