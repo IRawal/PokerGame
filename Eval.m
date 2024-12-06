@@ -79,7 +79,7 @@ classdef Eval
 	    fixed = hand;
 	end
 	function strength = eval7(hand)
-	    hand = fixHand(hand); 
+	    hand = Eval.fixHand(hand); 
 	    inds = nchoosek([1:7], 5);
 	    strength = 0;
 	    for i = [1:21]
