@@ -28,5 +28,15 @@ classdef Deck
 	    end
 	end
     end
+    methods(Static)
+	function str = hand2str(hand)
+	    hand(3, :) = " ";
+	    str = strjoin(hand(:));
+	end
+	function hand = str2hand(str)
+	    spl = split(str);
+	    hand = reshape(spl(1:end - 1), [2, (length(spl) - 1) / 2]);
+	end
+    end
 end
 

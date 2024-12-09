@@ -42,7 +42,8 @@ classdef Eval
 	function rflush = isRflush(hand)
 	    rflush = Eval.isSflush(hand) && Eval.high(hand) == 14;
 	end
-	function strength = evaluate(hand1)
+	function strength = eval5(hand1)
+	    hand1 = Eval.fixHand(hand1);
 	    hand1 = Eval.sortHand(hand1);
 
 	    % rough calculation to meet basic requirments.
@@ -83,8 +84,26 @@ classdef Eval
 	    inds = nchoosek([1:7], 5);
 	    strength = 0;
 	    for i = [1:21]
-		strength = max(strength, Eval.evaluate(hand(:, inds(i, :))));
+		strength = max(strength, Eval.eval5(hand(:, inds(i, :))));
 	    end 
+	end
+	function prob = mcs(hand1, hand2, iters)
+	    wins = 0;
+	    deck = Deck();
+	    for i =  [1:iters]
+		deck = deck.shuffled();
+		table = deck.dealn(3);
+
+		
+		strength1 = Eval.eval5([hand1, table]);
+		strength2 = Eval.eval5([hand2, table]);
+		strength1
+		if strength1 > strength2
+		    wins = wins + 1;
+		end
+	    end
+
+	    prob = wins / iters;
 	end
     end
 end
